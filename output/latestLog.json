@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Rede",
+    "status": "NOK",
+    "description": "Desligado com a cor neutra."
+  },
+  {
+    "name": "Bateria",
+    "status": "OK",
+    "description": "Ligado com a cor verde."
+  },
+  {
+    "name": "Bateria Baixa",
+    "status": "NOK",
+    "description": "Desligado com a cor neutra."
+  },
+  {
+    "name": "Inversor",
+    "status": "OK",
+    "description": "Ligado com a cor verde."
+  },
+  {
+    "name": "Bypass",
+    "status": "NOK",
+    "description": "Desligado com a cor neutra."
+  },
+  {
+    "name": "UPS Ok",
+    "status": "OK",
+    "description": "Ligado com a cor verde."
+  },
+  {
+    "name": "Teste",
+    "status": "OK",
+    "description": "Ligado com a cor verde."
+  },
+  {
+    "name": "Shutdown",
+    "status": "NOK",
+    "description": "Desligado com a cor neutra."
+  },
+  {
+    "name": "Beep",
+    "status": "NOK",
+    "description": "Desligado com a cor neutra."
+  },
+  {
+    "name": "Buck",
+    "status": "NOK",
+    "description": "Desligado com a cor neutra."
+  },
+  {
+    "name": "Boost",
+    "status": "OK",
+    "description": "Ligado com a cor verde."
+  },
+  {
+    "Última verificação em": "04/06/2025, às 23:23:50.203."
+  },
+  {
+    "Resultado da última verificação": "O nobreak apresentou oscilação na rede."
+  },
+  {
+    "Mensagem completa do estado do Nobreak": "O nobreak está consumindo a bateria. A rede elétrica está fora. | O Nobreak está em modo teste. Ao finalizar o teste, se houver rede elétrica, voltará a funcionar por ela."
+  }
+]
