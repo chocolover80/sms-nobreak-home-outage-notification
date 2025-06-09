@@ -82,7 +82,7 @@ async function getInformation(url) {
   let browser;
   let itemsToCheck = [];
   try {
-    browser = await puppeteer.launch({ headless: true });
+    browser = await puppeteer.launch({ headless: true, timeout: 0 });
     const page = await browser.newPage();
     // page.setDefaultNavigationTimeout(2 * 60 * 1000);
     page.setDefaultTimeout(2 * 60 * 1000); //setting default page timeout to 2 minutes
