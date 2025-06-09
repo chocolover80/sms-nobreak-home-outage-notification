@@ -5,6 +5,7 @@
 
 # local log files
 /output/latestLog.json
+/output/emailHistoryLog.json
 
 # local env files
 .env

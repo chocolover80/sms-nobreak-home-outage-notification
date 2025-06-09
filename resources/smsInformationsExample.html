@@ -1,149 +1,136 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 STRICT//EN" "DTD/xhtml1-strict.dtd">
 <!-- saved from url=(0021)http://192.168.15.10/ -->
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
-    <title>Agente HTTP - SMS</title>
-  </head>
 
-  <body onload="allowAJAX=true;" onunload="allowAJAX=false;">
-    <div id="shadow-one">
-      <div id="shadow-two">
-        <div id="shadow-three">
-          <div id="shadow-four">
-            <div id="page">
-              <div id="title">
-                <div class="right">NET ADAPTER II</div>
-                &nbsp;
-              </div>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>Agente HTTP - SMS</title>
+</head>
 
-              <div id="content">
-                <div style="float: right">
-                  <div id="status">
-                    <div id="loading" style="display: none">
-                      Erro:<br />Conex�o com a placa agente foi perdida.
-                    </div>
+<body onload="allowAJAX=true;" onunload="allowAJAX=false;">
+  <div id="shadow-one">
+    <div id="shadow-two">
+      <div id="shadow-three">
+        <div id="shadow-four">
+          <div id="page">
 
-                    <div id="display" style="display: block">
-                      <span
-                        style="
-                          float: right;
-                          font-size: 9px;
-                          font-weight: normal;
-                          padding-top: 8px;
-                          text-indent: 0px;
-                          display: none;
-                        "
-                      >
-                        <span style="color: #090">�</span> online(hab.)<br />
-                        <span style="color: #ddd">�</span> online(des.)<br />
-                        <span style="color: #900">�</span> off-line<br />
-                      </span>
+            <div style="padding:0 0 5px 5px"><img src="./Agente HTTP - SMS_files/SMSp.gif"></div>
 
-                      Status do UPS:<br />
+            <div id="title">
+              <div class="right">NET ADAPTER II</div>&nbsp;
+            </div>
+
+            <div id="menu">
+              <a href="http://192.168.15.10/index.htm" onclick="allowAJAX=false;">Home</a>
+              <a href="http://192.168.15.10/leituras.htm" onclick="allowAJAX=false;">Leituras</a>
+              <a href="http://192.168.15.10/protect/cmd.htm" onclick="allowAJAX=false;">Comandos</a>
+              <a href="http://192.168.15.10/protect/cfg.htm" onclick="allowAJAX=false;">Config. Rede</a>
+              <a href="http://192.168.15.10/protect/snmp.htm" onclick="allowAJAX=false;">SNMP</a>
+              <a href="http://192.168.15.10/protect/http.htm" onclick="allowAJAX=false;">HTTP</a>
+              <a href="http://192.168.15.10/protect/datahora.htm" onclick="allowAJAX=false;">Data e Hora</a>
+              <a href="http://192.168.15.10/protect/agenda.htm" onclick="allowAJAX=false;">Agendamentos</a>
+              <a href="http://192.168.15.10/protect/eventos.htm" onclick="allowAJAX=false;">Log de Eventos</a>
+              <a href="http://192.168.15.10/protect/dados.htm" onclick="allowAJAX=false;">Log de Dados</a>
+              <a href="http://192.168.15.10/protect/nobreak.htm" onclick="allowAJAX=false;">UPS</a>
+              <a href="http://192.168.15.10/protect/alerta24.htm" onclick="allowAJAX=false;">Alerta 24H</a>
+              <a href="http://192.168.15.10/protect/relatorio.htm" onclick="allowAJAX=false;">RelatÃ³rio</a>
+              <a href="http://192.168.15.10/protect/atualiza.htm" onclick="allowAJAX=false;">AtualizaÃ§Ã£o</a>
+            </div>
+
+            <div id="content">
+
+              <div style="float:right">
+                <div id="status">
+                  <div id="loading" style="display:none">Erro:<br>ConexÃ£o com a placa agente foi perdida.</div>
+
+                  <div id="display" style="display: block;">
+                    <span
+                      style="float:right;font-size:9px;font-weight:normal;padding-top:8px;text-indent:0px;display:none">
+                      <span style="color:#090">â€¢</span> online(hab.)<br>
+                      <span style="color:#ddd">â€¢</span> online(des.)<br>
+                      <span style="color:#900">â€¢</span> off-line<br>
+                    </span>
+
+                    Status do UPS:<br>
+                    <span class="infs">
+                      <span id="inf10" style="color: rgb(221, 221, 221);">â€¢</span> Rede<br>
+                      <span id="inf9" style="color: rgb(0, 153, 0);">â€¢</span> Bateria<br>
+                      <span id="inf8" style="color: rgb(221, 221, 221);">â€¢</span> Bateria Baixa<br>
+                      <span id="inf7" style="color: rgb(0, 153, 0);">â€¢</span> Inversor<br>
+                      <span id="inf6" style="color: rgb(221, 221, 221);">â€¢</span> Bypass<br>
+                      <span id="inf3" style="color: rgb(0, 153, 0);">â€¢</span> UPS Ok<br>
+                      <span id="inf2" style="color: rgb(221, 221, 221);">â€¢</span> Teste<br>
+                      <span id="inf1" style="color: rgb(221, 221, 221);">â€¢</span> Shutdown<br>
+                      <span id="inf0" style="color: rgb(0, 153, 0);">â€¢</span> Beep</span>
+
+                    <div id="extra">
                       <span class="infs">
-                        <span id="inf10" style="color: rgb(221, 221, 221)"
-                          >•</span
-                        >
-                        Rede<br />
-                        <span id="inf9" style="color: rgb(0, 153, 0)">•</span>
-                        Bateria<br />
-                        <span id="inf8" style="color: rgb(0, 153, 0)">•</span>
-                        Bateria Baixa<br />
-                        <span id="inf7" style="color: rgb(0, 153, 0)">•</span>
-                        Inversor<br />
-                        <span id="inf6" style="color: rgb(221, 221, 221)"
-                          >•</span
-                        >
-                        Bypass<br />
-                        <span id="inf3" style="color: rgb(0, 153, 0)">•</span>
-                        UPS Ok<br />
-                        <span id="inf2" style="color: rgb(0, 153, 0)">•</span>
-                        Teste<br />
-                        <span id="inf1" style="color: rgb(221, 221, 221)"
-                          >•</span
-                        >
-                        Shutdown<br />
-                        <span id="inf0" style="color: rgb(0, 153, 0)">•</span>
-                        Beep
-                      </span>
-
-                      <div id="extra">
-                        <span class="infs">
-                          <span id="inf5" style="color: rgb(0, 153, 0)">•</span>
-                          Buck<br />
-                          <span id="inf4" style="color: rgb(221, 221, 221)"
-                            >•</span
-                          >
-                          Boost<br />
-                        </span>
-                      </div>
-
-                      <span
-                        style="
-                          font-size: 9px;
-                          font-weight: normal;
-                          padding-top: 8px;
-                          text-indent: 0px;
-                        "
-                      >
-                        <span id="httpTmpShut"> </span>
+                        <span id="inf5" style="color: rgb(0, 153, 0);">â€¢</span> Buck<br>
+                        <span id="inf4" style="color: rgb(221, 221, 221);">â€¢</span> Boost<br>
                       </span>
                     </div>
+
+                    <span style="font-size:9px;font-weight:normal;padding-top:8px;text-indent:0px">
+                      <span id="httpTmpShut"> </span>
+                    </span>
                   </div>
                 </div>
 
-                <script type="text/javascript">
-                  setTimeout(
-                    "pedeConsultaAjax('/status.xml', consultaInfo, false)",
-                    2000
-                  );
-                  setTimeout(
-                    "pedeConsultaAjax('/nobreak.xml', consultaTmpShut, false)",
-                    3000
-                  );
-                </script>
 
-                <h1>Home</h1>
-
-                <p></p>
-                <table style="padding-left: 10px">
-                  <tbody>
-                    <tr>
-                      <td><b>Firmware vers�o:</b></td>
-                      <td>&nbsp;</td>
-                      <td>v5.01 Int.</td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><b>Gerado em:</b></td>
-                      <td>&nbsp;</td>
-                      <td>Jul 18 2019 11:28:12</td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><b>Layout vers�o:</b></td>
-                      <td>&nbsp;</td>
-                      <td>v13.0</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p></p>
               </div>
-              <div id="tronics" style="display: inline"></div>
 
-              <div class="spacer">&nbsp;</div>
-              <div id="footer">
-                Direitos autorais� 2007 GL Eletro-Eletr�nicos Ltda.
-              </div>
+              <script type="text/javascript">
+                setTimeout("pedeConsultaAjax('/status.xml', consultaInfo, false)", 2000);
+                setTimeout("pedeConsultaAjax('/nobreak.xml', consultaTmpShut, false)", 3000);
+              </script>
+
+              <h1>Home</h1>
+
+              <p></p>
+              <table style="padding-left: 10px;">
+                <tbody>
+                  <tr>
+                    <td><b>Firmware versÃ£o:</b></td>
+                    <td>&nbsp;</td>
+                    <td>v5.01 Int.</td>
+                  </tr>
+                  <tr>
+                    <td> </td>
+                  </tr>
+                  <tr>
+                    <td><b>Gerado em:</b></td>
+                    <td>&nbsp;</td>
+                    <td>Jul 18 2019 11:28:12</td>
+                  </tr>
+                  <tr>
+                    <td> </td>
+                  </tr>
+                  <tr>
+                    <td><b>Layout versÃ£o:</b></td>
+                    <td>&nbsp;</td>
+                    <td>v13.0</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p></p>
+
             </div>
+            <div id="tronics" style="display:inline"></div>
+
+
+
+            <div class="spacer">&nbsp;</div>
+            <div id="footer">Direitos autoraisÂ© 2007 GL Eletro-EletrÃ´nicos Ltda.</div>
+
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+
+
+
+
+</body>
+
 </html>
