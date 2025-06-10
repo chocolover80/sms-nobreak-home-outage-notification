@@ -36,5 +36,13 @@ set formattedTimestamp=%day%/%month%/%year%, %hour%:%minute%:%second%.
 
 echo O agente terminou a varredura! Verifique o log para saber detalhes.
 echo Log salvo em %logFile%
+
+:: Manter apenas os 10 logs mais recentes na pasta logs
+pushd operational_logs
+for /f "skip=10 delims=" %%F in ('dir /b /a:-d /o-d /t:w *.txt') do (
+    del "%%F"
+)
+popd
+
 exit
 
