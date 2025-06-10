@@ -47,7 +47,9 @@ Não optei por utilizar releases no projeto, dado o fato que gerar deployments d
     - **OBS:** É importante salientar que você vai precisar de algumas configurações de SMTP para o envio de email. Você pode usar aquele que for de sua preferência, mas você vai precisar de fato que ele esteja funcional. Eu recomendo utilizar o SMTP da Google, que oferece disparo de até 500 emails ao dia gratuitamente. Aqui eu deixo um [vídeo tutorial](https://www.youtube.com/watch?v=TrdWr3BmqT8) para que consiga fazer essa configuração. Deixo também essa [ferramenta de teste](https://www.gmass.co/smtp-test) para validar se o envio do email está ok. Uma vez que consiga validar que esteja tudo ok, você configurará os dados de SMTP e IP nesse arquivo .env. Sua configuração no arquivo .env deverá ficar similar ao que está abaixo:
 ![Prévia do arquivo .env configurado](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/env-file-config-instructions.png)
     - Uma vez que você tenha configurado corretamente o arquivo .env, você apenas precisa movê-lo para dentro da pasta raíz do agente *("sms-nobreak-home-outage-notification")*, e deverá funcionar.
-    
+
+*Caso você tenha optado por utilizar o serviço de SMTP do gmail, conforme sugerido, recomendo que você crie uma senha de app nas configurações da sua conta, para uso exclusivo do SMTP, assim, você não precisará utilizar sua senha comum e deixá-la à mostra no arquivo .env, sendo que ela será usada para outras finalidades. Para fazer isso, você pode seguir [esse guia](https://www.youtube.com/watch?v=nFbZLX2U-5k). Caso algum link no vídeo não esteja funcionando, ou apareça diferente pra você, use este [guia oficial da Google](https://support.google.com/accounts/answer/185833?hl=pt-BR), lá tem todos os links necessários e o passo a passo. Após conseguir gerar sua sua senha de app, você pode configurá-la no arquivo .env, conforme indicado acima*
+
 # Pondo o agente para funcionar
 Colocando o agente para funcionar.
 
@@ -114,21 +116,22 @@ Em meu setup, eu configurei ainda uma execução agendada do script .bat do tóp
     Pesquise "Agendador de Tarefas" no menu iniciar, e navegue até a pasta "Biblioteca do Agendador", então, clique com o botão direito, e então clique em "Criar Nova Tarefa". Você pode preencher os dados da forma sugerida abaixo:
     
     - Aba "Geral":
-    ![Configuração Aba "Geral"]()
+    ![Configuração Aba "Geral"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-general-tab.png)
+    >Importante deixar as configurações exatamente como na imagem, para evitar problemas.
     - Aba "Disparadores":
         
         - Você precisará cadastrar dois "disparadores", para o primeiro, você usará as configurações a seguir:
-        ![Configuração primeiro disparador]()
+        ![Configuração primeiro disparador](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/first-trigger-configs.png)
         
         *OBS: O campo "Iniciar", seguido por uma data não é muito importante, pois a tarefa será repetida a cada 10 minutos. Recomendo colocar a data de hoje, alguns minutos à frente, suficiente pra você terminar de configurar o agendamento, assim, ele iniciará e depois se repetirá sempre de 10 em 10 minutos*
         
         - Para o segundo disparador, as configurações são essas:
-        ![Configuração segundo disparador]()
+        ![Configuração segundo disparador](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/second-trigger-configs.png)
         
         *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar. Assim como no disparador anterior, aqui, na data que consta após a caixa marcada "Ativar", também não há grande importância, e você pode colocar uma data alguns minutos a frente da data de hoje, para poder dar tempo de finalizar as configurações do agendamento.*
   
         - Ao fim da configuração dos dois disparadores, você terá a Aba "Disparadores" parecida com a abaixo:
-        ![Configuração Aba "Disparadores"]()
+        ![Configuração Aba "Disparadores"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-triigers-tab.png)
     - Aba "Ações":
         - Nessa aba, configuraremos as ações que nosso agendamento fará. Nesse caso, executaremos o nosso script .bat acima explicado. Para isso, você precisará clicar em "Novo", e então marcar a Ação "Iniciar um programa". Na seção de configurações da tela, em "Programa/script", você selecionará o seu cli de preferência. No meu caso, eu usei o cmd nativo do windows, então o endereço é *C:\Windows\System32\cmd.exe*, na opção "Adicione argumentos (opcional)", você precisará acrescentar a operação '/c <"caminho do script bat">', caso você tenha seguido as sugestões de onde deixar cada pasta / arquivo, o texto a colocar seria */c "C:\Users\SEU-USUARIO\Documents\Monitor SMS Nobreak.bat"*. Conforme imagem abaixo:
         ![Configuração específica da aba "Ações"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/action-detail-configs.png)
@@ -140,9 +143,40 @@ Em meu setup, eu configurei ainda uma execução agendada do script .bat do tóp
     ![Configuração Aba "Condições"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-conditions-tab.png)
     >Importante deixar as configurações exatamente como na imagem, para evitar problemas.
     - Aba "Configurações"
-    ![Configuração Aba "Configurações"]()
+    ![Configuração Aba "Configurações"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-configurations-tab.png)
     >Importante deixar as configurações exatamente como na imagem, para evitar problemas.
 
     
 >*Conforme deixei no título do tópico, esta parte do guia é exclusivamente compatível com Windows. Caso você utilize um linux ou mac, terá que achar uma alternativa similar de agendamento de execução de processos. No caso do Windows, o Agendador de Tarefas faz isso perfeitamente*
 
+### 5 - Resolução de problemas:
+Idealmente, erros que aconteçam durante o processo poderão ser filtrados nos arquivos de log, e não deverão acarreetar em coisas maiores acerca da funcionalidade do agente. Porém, existem alguns erros em particular, que eu percebi que pode ocorrer em algumas máquinas mais frequentemente.
+
+*Verifique sempre os logs (tanto os da subpasta 'output' dentro da pasta do agente, quanto os da subpasta 'operational_logs" dentro da pasta do agente).* 
+
+**- 5.1 Erros na inicialização do agente, por conta de navegador:**
+
+Caso você encontre erro específico do puppeteer, que é a biblioteca node.js usada para fazer operações in-browser (baseado em chrome), reclamando de que não foi possível encontrar uma versão específica do chrome, isso se deve ao fato de que o puppeteer, instala "in-bundle" uma versão específica compactada do google chrome para poder processar as operações. O normal, é que quando você execute o comando "npm install" no início deste guia, na seção *"Setup do Agente > 2 - Baixando e configurando o Agente > 2.2 Instalando as dependências do agente:"*, isso já seja suprido. porém, podem haver casos onde isso não seja feito automaticamente.
+
+Caso isso ocorra, você poderá fazer a instalação manual do google chrome in-bundle do puppeteer da seguinte forma:
+
+- Navegue até a pasta *"node_modules"* dentro da pasta do agente, depois navegue até a pasta *"puppeteer"*, de dentro dessa pasta, por meio do seu CLI de preferência, execute o comando *"node install.mjs"*. Aguarde a finalização do projeto, e pronto! Agora o chrome in-bundle, necessário para que o puppeteer consiga processar instruções no navegador já estará funcionando corretamente.
+
+**- 5.2 Erros relacionados ao envio de email:**
+
+Se em algum ponto você receber algum erro de *"connection refused"* ou *"timeout"* durante o processo de envio de email, há grandes chances disso ter acontecido por conta de má configuração das informações de SMTP no seu arquivo .env, portanto verifique-o de ponta a ponta.
+
+Além de problemas de informação do arquivo .env, certifique-se de que não esteja rodando o script numa rede protegida, ou caso sim, crie excessões de firewall e porta em seu roteador, pois se por alguma razão serviços de SMTP forem bloqueados pela sua rede, não vai funcionar de maneira nenhuma a notificação por email.
+
+# Conclusão
+Bem, acredito que isso seja tudo. A princípio, o agente é extremamente simples, e não tem codificação complexa ou funcionalidades muito elaboradas. Foi tudo feito com puro webscrapping e as regras de negócio foram bem simples e atenderam muito bem minha necessidade. Mas de dev pra dev, a magia do opensource é poder colaborar entre si, então sintam-se à vontade para utilizar o projeto para qualquer finalidade (desde que não remunerada é claro), e até propor melhorias, sugestões e críticas. Qualquer dúvida que não esteja suprida na documentação, sinta-se a vontade para me contatar. Deixo meus detalhes de contato na página do perfil aqui no GitHub. Espero que seja útil, e até a próxima!
+
+E lembrem-se sempre: *"Não há lugar como 127.0.0.1"*
+
+Com carinho,
+
+chocolover80 (E. D. Norton)
+
+<p align="left">
+  <img src="https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/author%20signature.jpeg" width="200" height="200" alt="chocolover80's signature img"/>
+</p>
