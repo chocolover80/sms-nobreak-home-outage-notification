@@ -1,8 +1,0 @@
-<img src="https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/sms-home-agent-logo.png" align="right" height="64px" />
-
-# sms-nobreak-home-outage-notification
-
-Esta aplicação visa coletar os status dos botões do meu Nobreak pessoal da SMS, que eu possuo em minha casa. Ela irá monitorar (via webscrapping com node.js e puppeteer) o status atual de cada um dos botões (que são mostrados em um IP dedicado dentro da minha rede), salvar os dados em um arquivo de Log em formato JSON, e então enviar um email sempre que houver oscilações, ou recuperações de oscilações anteriores na energia do aparelho.
-
-
-Here are a few tips to get you started:
