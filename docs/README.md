@@ -135,8 +135,6 @@ Em meu setup, eu configurei ainda uma execução agendada do script .bat do tóp
     - Aba "Ações":
         - Nessa aba, configuraremos as ações que nosso agendamento fará. Nesse caso, executaremos o nosso script .bat acima explicado. Para isso, você precisará clicar em "Novo", e então marcar a Ação "Iniciar um programa". Na seção de configurações da tela, em "Programa/script", você selecionará o seu cli de preferência. No meu caso, eu usei o cmd nativo do windows, então o endereço é *C:\Windows\System32\cmd.exe*, na opção "Adicione argumentos (opcional)", você precisará acrescentar a operação '/c <"caminho do script bat">', caso você tenha seguido as sugestões de onde deixar cada pasta / arquivo, o texto a colocar seria */c "C:\Users\SEU-USUARIO\Documents\Monitor SMS Nobreak.bat"*. Conforme imagem abaixo:
         ![Configuração específica da aba "Ações"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/action-detail-configs.png)
-
-    *Caso você deseje, pode colocar o argumento como '/min /c "C:\Users\SEU-USUARIO\Documents\Monitor SMS Nobreak.bat', assim, ele executará o comando, mas minimizando a tela do cmd. Assim ela não tomará a frente de outras telas caso você esteja executando outros processos ou janelas na máquina onde o agente executará. (eu recomendo, e fiz no meu setup!)*
     
     Ao fim do processo, a aba "Ações" ficará mais ou menos como abaixo:
     
