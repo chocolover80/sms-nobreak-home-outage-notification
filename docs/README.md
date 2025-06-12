@@ -97,53 +97,94 @@ Caso o Nobreak retorne um ok em outras situações, o normal é que envios de em
 
 Para o meu setup, conforme já mencionado, foi utilizado um Raspberry Pi4, utilizando uma build Arc do Windows 10. Por esse raspberry Pi eu faço o acesso remoto à diversas coisas de meu setup, e posso monitorá-las, dentre elas, o agente deste repositório.
 
-Pensando nisso, eu desenvolvi um script .bat (executa com o CMD do Windows), que navega até a pasta do agente, e executa o código para que a captura de status seja realizada, os emails sejam enviados e etc.
+Pensando nisso, eu utilizei um comando Powershell (executa com o powershell.exe do Windows), que navega até a pasta do agente, e executa o código para que a captura de status seja realizada, os emails sejam enviados e etc.
 
-Esse script está localizado na subpasta *"resources"* do agente. Conforme eu recomendei anteriormente, se você pretende utilizar também um windows no seu setup, para capturar os status do nobreak, faça a criação de uma pasta chamada *"node"*, dentro da raíz de seu disco "C:", e dentro dela você pode colar a pasta inteira do agente. Você pode usar essa pasta para outras finalidades também sem problema, desde que dentro dela esteja a pasta do agente.
+Esse comando está localizado na subpasta *"resources"* do agente, no arquivo *"Automate Agent Execution PowerShell Command.txt"*, você pode copiar o comando dentro do arquivo e colar no seu Powershell. Conforme eu recomendei anteriormente, se você pretende utilizar também um windows no seu setup, para capturar os status do nobreak, faça a criação de uma pasta chamada *"node"*, dentro da raíz de seu disco "C:", e dentro dela você pode colar a pasta inteira do agente. Você pode usar essa pasta para outras finalidades também sem problema, desde que dentro dela esteja a pasta do agente.
 
-Quanto ao script .bat em si, a localização dele não tem tanta importância. Nos meus testes, eu deixei-o dentro da minha pasta de Documentos *("C:\Users\<meu_usuário>\Documents")*. O script também salva um log operacional, para salvar a saída de texto da execução do agente, de maneira que você possa acompanhar posteriormente. Há ainda um controle, para que ele mantenha apenas os 10 logs mais recentes no disco, assim não será ocupado espaço atoa, de logs muito antigos.
+Quanto ao comando em si, a localização de onde você o executa não tem tanta importância. Nos meus testes, eu executei-o dentro da minha pasta de Documentos e *("C:\Users\<meu_usuário>\Documents")* e diversas outras, e funcionou sem problemas. O comando também emite um log operacional, para salvar a saída de texto da execução do agente, de maneira que você possa acompanhar posteriormente.
+
+Há ainda outro comando, que faz um controle, para que mantenham-se apenas os 10 logs mais recentes no disco, assim não será ocupado espaço atoa, com logs muito antigos. Este comando pode ser localizado na subpasta *"resources"* do agente, no arquivo *"Automate Old-Log Deletion PowerShell Command.txt"*, você pode copiar o comando dentro do arquivo e colar no seu Powershell. 
 
 ![Exemplo de pasta de log operacional do script](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/operational-log-folder.png)
 
->*No exemplo da imagem acima, você pode ter uma ideia de como ficará a subpasta 'operational_logs' dentro da pasta do agente, que conterá todos os últimos 10 logs operacionais obtidos após a execução do script .bat*.
+>*No exemplo da imagem acima, você pode ter uma ideia de como ficará a subpasta 'operational_logs' dentro da pasta do agente, que conterá todos os últimos 10 logs operacionais obtidos após a execução do script powershell*.
 
-Tendo tudo isso em funcionamento, sempre que você quiser monitorar, bastará executar o .bat diretamente da pasta onde você deixou-o, e pronto! Todo o processo é automatizado. Caso você não deseje usar o .bat, você terá que navegar até a pasta do agente *("sms-nobreak-home-outage-notification")* e executar o comando *"node index.js"* de dentro dela, por meio da sua CLI de preferência. No próximo tópico, eu explorarei o tema do agendamento da execução do script, para que você automatize a monitoração sem precisar manualmente ter que abrir nenhum script, ou executar nenhum comando.
+Tendo tudo isso em funcionamento, sempre que você quiser monitorar, bastará executar o comando diretamente do seu Powershell, e pronto! Todo o processo é automatizado. Caso você não deseje usar o .comando via Powershell, você terá que navegar até a pasta do agente *("sms-nobreak-home-outage-notification")* e executar o comando *"node index.js"* de dentro dela, por meio da sua CLI de preferência. No próximo tópico, eu explorarei o tema do agendamento da execução do script, para que você automatize a monitoração sem precisar manualmente ter que abrir nenhum script, ou executar nenhum comando.
 
 **- 4.2 Agendamento (compatível com Windows):** 
-Em meu setup, eu configurei ainda uma execução agendada do script .bat do tópico anterior, para que assim, mesmo fora de casa, ausente, ou fazendo outras coisas, eu consiga sempre ter controle da situação atual de meu Nobreak. Para isso, eu utilizei aliado ao script .bat acima, o agendador de tarefas do windows. Abaixo, deixarei o passo a passo para configurar o agendamento.
-- **4.2.1 Criando a tarefa no Agendador de Tarefas**
+Em meu setup, eu configurei ainda uma execução agendada do comando Powershell do tópico anterior, para que assim, mesmo fora de casa, ausente, ou fazendo outras coisas, eu consiga sempre ter controle da situação atual de meu Nobreak. Para isso, eu utilizei aliado ao comando acima, o agendador de tarefas do windows. Abaixo, deixarei o passo a passo para configurar o agendamento.
+- **4.2.1 Criando as tarefas no Agendador de Tarefas**
 
     Pesquise "Agendador de Tarefas" no menu iniciar, e navegue até a pasta "Biblioteca do Agendador", então, clique com o botão direito, e então clique em "Criar Nova Tarefa". Você pode preencher os dados da forma sugerida abaixo:
     
+    >Aqui é importante salientar que: caso você queira optar por fazer as rotinas de automação abaixo, precisará criar uma pasta chamada "operational_logs" dentro da pasta do seu agente (caso tenha seguido a sugestão de caminho que recomendamos, será então em *"C:\node\sms-nobreak-home-outage-notification\"*)
+
+    >**4.2.1.1 Automação de execução do agente** 
     - Aba "Geral":
-    ![Configuração Aba "Geral"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-general-tab.png)
+    ![Configuração Aba "Geral" (automação do agente)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-general-tab.png)
     >Importante deixar as configurações exatamente como na imagem, para evitar problemas.
     - Aba "Disparadores":
         
         - Você precisará cadastrar dois "disparadores", para o primeiro, você usará as configurações a seguir:
-        ![Configuração primeiro disparador](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/first-trigger-configs.png)
+        ![Configuração primeiro disparador (automação do agente)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/first-trigger-configs.png)
         
-        *OBS: O campo "Iniciar", seguido por uma data não é muito importante, pois a tarefa será repetida a cada 10 minutos. Recomendo colocar a data de hoje, alguns minutos à frente, suficiente pra você terminar de configurar o agendamento, assim, ele iniciará e depois se repetirá sempre de 10 em 10 minutos*
+        *OBS: O campo "Iniciar", seguido por uma data não é muito importante, pois a tarefa será repetida a cada 10 minutos. Recomendo colocar a data de hoje, alguns minutos à frente, suficiente pra você terminar de configurar o agendamento, assim, ele iniciará e depois se repetirá sempre de 10 em 10 minutos.*
+        
+        *OBS 2: É importante preencher o campo de "Interromper tarefa executada por mais de com o valor que te atender. Por padrão, ele lista apenas alguns valores, mas você pode digitar (desde que no formato correto), como no exemplo da imagem, onde eu coloco '8 minutos'. É bacana colocar esse tempo limite, pois caso a aplicação trave em algum ponto, não vai ficar num eterno loop. Vai encerrar e tentar de novo no tempo que você agendou.*        
         
         - Para o segundo disparador, as configurações são essas:
-        ![Configuração segundo disparador](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/second-trigger-configs.png)
+        ![Configuração segundo disparador (automação do agente)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/second-trigger-configs.png)
         
         *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar. Assim como no disparador anterior, aqui, na data que consta após a caixa marcada "Ativar", também não há grande importância, e você pode colocar uma data alguns minutos a frente da data de hoje, para poder dar tempo de finalizar as configurações do agendamento.*
+
+        *OBS 2: É importante preencher o campo de "Interromper tarefa executada por mais de com o valor que te atender. Por padrão, ele lista apenas alguns valores, mas você pode digitar (desde que no formato correto), como no exemplo da imagem, onde eu coloco '8 minutos'. É bacana colocar esse tempo limite, pois caso a aplicação trave em algum ponto, não vai ficar num eterno loop. Vai encerrar e tentar de novo no tempo que você agendou.* 
   
         - Ao fim da configuração dos dois disparadores, você terá a Aba "Disparadores" parecida com a abaixo:
-        ![Configuração Aba "Disparadores"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-triigers-tab.png)
+        ![Configuração Aba "Disparadores"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-triggers-tab.png)
     - Aba "Ações":
-        - Nessa aba, configuraremos as ações que nosso agendamento fará. Nesse caso, executaremos o nosso script .bat acima explicado. Para isso, você precisará clicar em "Novo", e então marcar a Ação "Iniciar um programa". Na seção de configurações da tela, em "Programa/script", você selecionará o seu cli de preferência. No meu caso, eu usei o cmd nativo do windows, então o endereço é *C:\Windows\System32\cmd.exe*, na opção "Adicione argumentos (opcional)", você precisará acrescentar a operação '/c <"caminho do script bat">', caso você tenha seguido as sugestões de onde deixar cada pasta / arquivo, o texto a colocar seria */c "C:\Users\SEU-USUARIO\Documents\Monitor SMS Nobreak.bat"*. Conforme imagem abaixo:
-        ![Configuração específica da aba "Ações"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/action-detail-configs.png)
+        - Nessa aba, configuraremos as ações que nosso agendamento fará. Nesse caso, executaremos o nosso comando powershell acima explicado. Para isso, você precisará clicar em "Novo", e então marcar a Ação "Iniciar um programa". Na seção de configurações da tela, em "Programa/script", você selecionará o powershell, então o texto a ser inserido é *powershell.exe*, na opção "Adicione argumentos (opcional)", você precisará acrescentar a operação >>-NoProfile -Command "Write-Host 'Iniciando varredura do Nobreak...' -ForegroundColor Cyan; cd '[CAMINHO ONDE INSTALOU O AGENTE AQUI]'; node index.js | Out-File -FilePath ('C:\node\[CAMINHO ONDE INSTALOU O AGENTE AQUI]\operational_logs\operational_log_{0:dd-MM-yyyy_HH-mm-ss}.txt' -f (Get-Date)); Write-Host 'Varredura concluída.' -ForegroundColor Green"<<, caso você tenha seguido as sugestões de onde deixar cada pasta / arquivo, o texto a colocar no lugar do que está dentro dos colchetes (e removendo os colchetes claro) seria *'C:\node\sms-nobreak-home-outage-notification'*. Conforme imagem abaixo:
+        ![Configuração específica da aba "Ações" (automação do agente)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/action-detail-configs.png)
     
     Ao fim do processo, a aba "Ações" ficará mais ou menos como abaixo:
     
-    ![Configuração Aba "Ações"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-actions-tab.png)
+    ![Configuração Aba "Ações" (automação do agente)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-actions-tab.png)
     - Aba "Condições":
-    ![Configuração Aba "Condições"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-conditions-tab.png)
+    ![Configuração Aba "Condições" (automação do agente)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-conditions-tab.png)
     >Importante deixar as configurações exatamente como na imagem, para evitar problemas.
     - Aba "Configurações"
-    ![Configuração Aba "Configurações"](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-configurations-tab.png)
+    ![Configuração Aba "Configurações" (automação do agente)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-configurations-tab.png)
+    >Importante deixar as configurações exatamente como na imagem, para evitar problemas.
+
+    >**4.2.1.2 Automação de limpeza de logs obsoletos** 
+    - Aba "Geral":
+    ![Configuração Aba "Geral" (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-log_cleaner-general-tab.png)
+    >Importante deixar as configurações exatamente como na imagem, para evitar problemas.
+    - Aba "Disparadores":
+        
+        - Você precisará cadastrar dois "disparadores", para o primeiro, você usará as configurações a seguir:
+        ![Configuração primeiro disparador (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/log_cleaner-first-trigger-configs.png)
+        
+        *OBS: Recomendo colocar um horário interessante que não conflite com a rotina anterior, de automação do agente, no caso, eu configurei pra rodar sempre a cada 10 minutos, em horário redondo, ou seja: 08:00 - 08:10 - 08:20 e assim sucessivamente... Se você colocar a rotina de limpeza em horários redondos também, pode acabar conflitando o processo de escrita de arquivos no disco, no meu caso, eu configurei para rodar num dia específico, às 23:55, assim, não conflita com o horário redondo de automação do agente das 23:50, nem de 00:00. E após isso, ele se repetirá todo dia nesse mesmo horário.*   
+        
+        - Para o segundo disparador, as configurações são essas:
+        ![Configuração segundo disparador (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/log_cleaner-second-trigger-configs.png)
+        
+        *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar.*
+  
+        - Ao fim da configuração dos dois disparadores, você terá a Aba "Disparadores" parecida com a abaixo:
+        ![Configuração Aba "Disparadores" (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-log_cleaner-triggers-tab.png)
+    - Aba "Ações":
+        - Nessa aba, configuraremos as ações que nosso agendamento fará. Nesse caso, executaremos o nosso comando powershell acima explicado. Para isso, você precisará clicar em "Novo", e então marcar a Ação "Iniciar um programa". Na seção de configurações da tela, em "Programa/script", você selecionará o powershell, então o texto a ser inserido é *powershell.exe*, na opção "Adicione argumentos (opcional)", você precisará acrescentar a operação >>-NoProfile -Command "Write-Host 'Iniciando limpeza de logs obsoletos...' -ForegroundColor Yellow; Get-ChildItem '[CAMINHO DOS SEUS LOGS OPERACIONAIS AQUI]' -Filter 'operational_log_*.txt' | Sort-Object LastWriteTime -Descending | Select-Object -Skip 10 | Remove-Item -Force; Write-Host 'Limpeza concluída. Os 10 últimos logs seguem na pasta!' -ForegroundColor Green"<<, caso você tenha seguido as sugestões de onde deixar cada pasta / arquivo, o texto a colocar no lugar do que está dentro dos colchetes (e removendo os colchetes claro) seria *'C:\node\sms-nobreak-home-outage-notification/operational_logs'*. Conforme imagem abaixo:
+        ![Configuração específica da aba "Ações" (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/action-log_cleaner-detail-configs.png)
+    
+    Ao fim do processo, a aba "Ações" ficará mais ou menos como abaixo:
+    
+    ![Configuração Aba "Ações" (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-log_cleaner-actions-tab.png)
+    - Aba "Condições":
+    ![Configuração Aba "Condições" (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-log_cleaner-conditions-tab.png)
+    >Importante deixar as configurações exatamente como na imagem, para evitar problemas.
+    - Aba "Configurações"
+    ![Configuração Aba "Configurações" (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-log_cleaner-configurations-tab.png)
     >Importante deixar as configurações exatamente como na imagem, para evitar problemas.
 
     
