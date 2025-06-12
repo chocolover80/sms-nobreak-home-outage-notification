@@ -1,0 +1,1 @@
+Write-Host 'Iniciando limpeza de logs obsoletos...' -ForegroundColor Yellow; Get-ChildItem 'C:\node\sms-nobreak-home-outage-notification\operational_logs' -Filter 'operational_log_*.txt' | Sort-Object LastWriteTime -Descending | Select-Object -Skip 10 | Remove-Item -Force; Write-Host 'Limpeza concluída. Os 10 últimos logs seguem na pasta!' -ForegroundColor Green

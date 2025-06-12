@@ -1,0 +1,1 @@
+Write-Host 'Iniciando varredura do Nobreak...' -ForegroundColor Cyan; cd 'C:\node\sms-nobreak-home-outage-notification'; node index.js | Out-File -FilePath ("C:\node\sms-nobreak-home-outage-notification\operational_logs\operational_log_{0:dd-MM-yyyy_HH-mm-ss}.txt" -f (Get-Date)); Write-Host 'Varredura concluída.' -ForegroundColor Green
