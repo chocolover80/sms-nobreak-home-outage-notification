@@ -207,6 +207,7 @@ async function getInformation(url) {
           "Notificação da última verificação": `Um email com o status foi enviado para: <${process.env.SMTP_AUTH_USER}>`,
         });
         saveLogFileToJSON("./output/latestLog.json", data);
+        console.log("The UPS is down! Attempting to send an alert email!");
         sendEmail(htmlMSG, data, UPS_IS_UP);
         saveLogFileToJSON("./output/emailHistoryLog.json", {
           lastDispatchedTimestamp: new Date().toISOString(),
@@ -257,6 +258,7 @@ async function getInformation(url) {
           "Notificação da última verificação": `Um email com o status foi enviado para: <${process.env.SMTP_AUTH_USER}>`,
         });
         saveLogFileToJSON("./output/latestLog.json", data);
+        console.log("The UPS is up again! Attempting to send an alert email!");
         sendEmail(htmlMSG, data, UPS_IS_UP);
         saveLogFileToJSON("./output/emailHistoryLog.json", {
           lastDispatchedTimestamp: new Date().toISOString(),
