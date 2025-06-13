@@ -27,12 +27,12 @@ Uma vez que você os tenha em seu setup e esteja tudo funcionando, você vai pre
 A codificação do agente foi toda feita baseada na versão 22.16.0 do node + 10.9.2 do npm. Porém testei com versões anteriores, e funcionou sem maiores problemas. Tente manter o node instalado na máquina de onde executará o agente entre a versão 20 e a 22 e deverá funcionar tudo ok!
 
 ### 2 - Baixando e configurando o Agente:
-Não optei por utilizar releases no projeto, dado o fato que gerar deployments dele me demandaria criação de um frontend (fosse uma janela num .exe ou uma webpage), então você precisará baixar um zip do repositório, e ela já te dará praticamente tudo o que você necessitará para que tudo funcione. Precisará apenas configurar alguns pontos, conforme faremos abaixo nos próximos passos. :)
+As releases no projeto, são em essência equvalentes a gerar um .zip do repositório, com a diferença que nela haverão já pré-preenchidos o arquivo .env, e haverá a pasta *'operational_logs'* (essa pasta serve para finalidade de automação via Agendador de Tarefas, que trataremos mais a frente neste guia.) criada. O .zip já te dará praticamente tudo o que você necessitará para que o agente funcione. Precisará apenas configurar alguns pontos, conforme faremos abaixo nos próximos passos. :)
 
 **- 2.1 Baixando os arquivos:** 
 - Navegue até o [repositório do projeto](https://github.com/chocolover80/sms-nobreak-home-outage-notification), clique em "<> Code", e escolha baixar o .zip. Conforme abaixo:
 ![Prévia da instrução de download do código do Agente](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/repo-download-instructions.png) 
-- Extraia os arquivos para uma pasta de confiança (se estiver utilizando o windows, recomendo criar uma pasta chamada 'node', dentro da raíz do seu disco 'C:', e então dentro dessa parta, extrair o .zip baixado).
+- Extraia os arquivos para uma pasta de confiança (se estiver utilizando o windows, recomendo criar uma pasta chamada 'node', dentro da raíz do seu disco 'C:', e então dentro dessa pasta, extrair o .zip baixado).
 
 **- 2.2 Instalando as dependências do agente:** 
 
