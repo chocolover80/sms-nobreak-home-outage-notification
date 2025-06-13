@@ -27,7 +27,7 @@ Uma vez que você os tenha em seu setup e esteja tudo funcionando, você vai pre
 A codificação do agente foi toda feita baseada na versão 22.16.0 do node + 10.9.2 do npm. Porém testei com versões anteriores, e funcionou sem maiores problemas. Tente manter o node instalado na máquina de onde executará o agente entre a versão 20 e a 22 e deverá funcionar tudo ok!
 
 ### 2 - Baixando e configurando o Agente:
-As releases no projeto, são em essência equvalentes a gerar um .zip do repositório, com a diferença que nela haverão já pré-preenchidos o arquivo .env, e haverá a pasta *'operational_logs'* (essa pasta serve para finalidade de automação via Agendador de Tarefas, que trataremos mais a frente neste guia.) criada. O .zip já te dará praticamente tudo o que você necessitará para que o agente funcione. Precisará apenas configurar alguns pontos, conforme faremos abaixo nos próximos passos. :)
+As releases no projeto, são em essência equivalentes a gerar um .zip do repositório, com a diferença que nela haverão já pré-preenchidos o arquivo .env, e haverá a pasta *'operational_logs'* (essa pasta serve para finalidade de automação via Agendador de Tarefas, que trataremos mais a frente neste guia.) criada. O .zip já te dará praticamente tudo o que você necessitará para que o agente funcione. Precisará apenas configurar alguns pontos, conforme faremos abaixo nos próximos passos. :)
 
 **- 2.1 Baixando os arquivos:** 
 - Navegue até o [repositório do projeto](https://github.com/chocolover80/sms-nobreak-home-outage-notification), clique em "<> Code", e escolha baixar o .zip. Conforme abaixo:
