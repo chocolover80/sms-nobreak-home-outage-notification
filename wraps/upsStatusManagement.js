@@ -142,8 +142,8 @@ async function getInformation(url) {
           "O nobreak apresentou oscilação na rede.",
       });
       data.push({
-        "Mensagem completa do estado do Nobreak": emailMsg.replace(
-          "<br><br>",
+        "Mensagem completa do estado do Nobreak": emailMsg.replaceAll(
+          /<br><br>/g,
           " | "
         ),
       });
