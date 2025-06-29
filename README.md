@@ -18,11 +18,13 @@ Esse item é o básico do básico para o funcionamento de tudo que este guia con
 - [Power Sinus NG 3200VA](https://www.sms.com.br/governo/produtos/nobreaks/line-interactive-senoidal/power-sinus-ng-3200-va); 
 - [Net Adapter II (externo) SMS](https://www.sms.com.br/produtos/acessorios/gerenciamento/net-adapter-ii-externo);
 - [Raspberry Pi4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/);
->Você pode encontrar informações sobre os dois primeiros produtos acima no [site oficial da SMS](www.sms.com.br/), assim como pode comprpa-los em seus revendedores no Brasil (pesquisando na Kabum, MercadoLivre, Amazon e afins)
+>Você pode encontrar informações sobre os dois primeiros produtos acima no [site oficial da SMS](www.sms.com.br/), assim como pode comprá-los em seus revendedores no Brasil (pesquisando na Kabum, MercadoLivre, Amazon e afins)
+
+** Conforme nota abaixo, meu setup foi atualizado durante os testes, então no lugar do Pi4, eu usei o [GMKTec Nucbox G5](https://www.gmktec.com/products/intel-alder-lake-n97-mini-pc-nucbox-g5?srsltid=AfmBOoq9muMTurRlHbpqdfixOLxQFqGtgqkhfOV7SP9mv8_BLcujz2vZ).
 
 >Aqui eu quero lembrar, que posteriormente, eu acabei realizando um upgrade, onde migrei do Raspberry Pi4 para um Mini PC GMKTec G5. Veja a subseção "Upgrade de equipamento" na seção Utilidades ao fim deste guia.
 
-Uma vez que você os tenha em seu setup e esteja tudo funcionando, você vai precisar ter obviamente também possuir conexão de internet, e algum dispositivo capaz de executar Node.js. No meu caso, utilizei um servidor dedicado, mais especificamente um raspberry pi4, com windows arc instalado. É um tanto lento, mas serve à finalidade proposta. Caso deseje utilizar distros linux ou até MAC, contanto que possua o Node.js instalado, funcionará, já que o Net Adapter e o Nobreak se baseiam unicamente na comunicação entre eles, e não em um SO específico e afins. Se até mesmo quiser rodar através de um aparelho portátil, é possível, desde que consiga rodar o Node.js por ele.
+Uma vez que você os tenha em seu setup e esteja tudo funcionando, você vai precisar ter obviamente também possuir conexão de internet, e algum dispositivo capaz de executar Node.js. No meu caso, utilizei um servidor dedicado, mais especificamente um raspberry pi4, com windows arc instalado. É um tanto lento, mas serve à finalidade proposta. - posteriormente inclusive, acabei por atualizar para um Mini PC com mais desempenho, também Windows (verifique a seção "Utilidades" deste guia para mais detalhes) - Caso deseje utilizar distros linux ou até MAC, contanto que possua o Node.js instalado, funcionará, já que o Net Adapter e o Nobreak se baseiam unicamente na comunicação entre eles, e não em um SO específico e afins. Se até mesmo quiser rodar através de um aparelho portátil, é possível, desde que consiga rodar o Node.js por ele.
 
 **- 1.2 Node.js:**
 
@@ -97,7 +99,7 @@ Caso o Nobreak retorne um ok em outras situações, o normal é que envios de em
 
 **- 4.1 Automatização de execução do agente:** 
 
-Para o meu setup, conforme já mencionado, foi utilizado um Raspberry Pi4, utilizando uma build Arc do Windows 10. Por esse raspberry Pi eu faço o acesso remoto à diversas coisas de meu setup, e posso monitorá-las, dentre elas, o agente deste repositório.
+Para o meu setup, conforme já mencionado, foi utilizado um Raspberry Pi4, utilizando uma build Arc do Windows 10. Por esse raspberry Pi eu faço o acesso remoto à diversas coisas de meu setup, e posso monitorá-las, dentre elas, o agente deste repositório. - Posteriormente, atualizei para um mini PC Nucbox G5, da GMKTec, para maior desempenho, também utilizando um Windows. Cheque a seção "Utilidades" deste guia para mais detalhes.
 
 Pensando nisso, eu utilizei um comando Powershell (executa com o powershell.exe do Windows), que navega até a pasta do agente, e executa o código para que a captura de status seja realizada, os emails sejam enviados e etc.
 
@@ -137,7 +139,7 @@ Em meu setup, eu configurei ainda uma execução agendada do comando Powershell 
         - Para o segundo disparador, as configurações são essas:
         ![Configuração segundo disparador (automação do agente)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/second-trigger-configs.png)
         
-        *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar. Assim como no disparador anterior, aqui, na data que consta após a caixa marcada "Ativar", também não há grande importância, e você pode colocar uma data alguns minutos a frente da data de hoje, para poder dar tempo de finalizar as configurações do agendamento.*
+        *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4 e posteriormente um Nucbox G5) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar. Assim como no disparador anterior, aqui, na data que consta após a caixa marcada "Ativar", também não há grande importância, e você pode colocar uma data alguns minutos a frente da data de hoje, para poder dar tempo de finalizar as configurações do agendamento.*
 
         *OBS 2: É importante preencher o campo de "Interromper tarefa executada por mais de com o valor que te atender. Por padrão, ele lista apenas alguns valores, mas você pode digitar (desde que no formato correto), como no exemplo da imagem, onde eu coloco '8 minutos'. É bacana colocar esse tempo limite, pois caso a aplicação trave em algum ponto, não vai ficar num eterno loop. Vai encerrar e tentar de novo no tempo que você agendou.* 
   
@@ -171,7 +173,7 @@ Em meu setup, eu configurei ainda uma execução agendada do comando Powershell 
         - Para o segundo disparador, as configurações são essas:
         ![Configuração segundo disparador (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/log_cleaner-second-trigger-configs.png)
         
-        *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar.*
+        *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4 e posteriormente um Nucbox G5) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar.*
   
         - Ao fim da configuração dos dois disparadores, você terá a Aba "Disparadores" parecida com a abaixo:
         ![Configuração Aba "Disparadores" (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-log_cleaner-triggers-tab.png)
@@ -219,7 +221,7 @@ Durante os meus testes, e algumas semanas depois fazendo outras tarefas, eu perc
 
 Com isso, eu optei por fazer um upgrade de equipamento, onde eu substitui o Raspberry Pi4 por um Mini PC GMKTec G5, um Computador mega pequeno (até menor em tamanho que o Pi4), e com um grande poder de processamento se comparado ao Pi4. Dá até pra rodar outras coisas como retrogaming, e até alguns jogos mais leves (Hades, Deadcells e afins), então é um excelente aliado nessa aplicação. Com ele, não haverá nenhum desses problemas acima citados no Pi4, e além disso, ele ainda vem com uma licença Windows 11 Pro. Ou seja: é uma licença oficial, de uma versão atual do Windows, que terá suporte, segurança e afins. Ou seja, foi apenas vitória escolher fazer esse upgrade. Você consegue encontrar ele para comprar no Brasil entre 1500 a 2000 reais, ou pode importar no AliExpress (tenha em mente as taxações).
 
-Aqui, eu deixo o [site oficial da GMKTec](https://www.gmktec.com) - Você pode inclusive comprar direto pelo site deles, mas tenha em mente os impostos de importação, e a limitação que pode haver para envios até o Brasil - bem como a [página de suporte oficial da GMKTec](https://www.gmktec.com/pages/drivers-and-software?srsltid=AfmBOooI7fx1T7VpmnSbbAE1OOIikWRk0LoQl8_EVlZqTSWuVN8r5-Ho), onde dentre os itens da tabela, você pode achar os arquivos necessários para o Modelo Nukbox G5, tanto a instalação do windows customizada específica para o equipamento (caso você precise formatar) e os drivers em si.
+Aqui, eu deixo o [site oficial da GMKTec](https://www.gmktec.com) - Você pode inclusive comprar direto pelo site deles, mas tenha em mente os impostos de importação, e a limitação que pode haver para envios até o Brasil - bem como a [página de suporte oficial da GMKTec](https://www.gmktec.com/pages/drivers-and-software?srsltid=AfmBOooI7fx1T7VpmnSbbAE1OOIikWRk0LoQl8_EVlZqTSWuVN8r5-Ho), onde dentre os itens da tabela, você pode achar os arquivos necessários para o Modelo Nucbox G5, tanto a instalação do windows customizada específica para o equipamento (caso você precise formatar) e os drivers em si.
 
 **- 6.2 Mudanças pós o upgrade:**
 
