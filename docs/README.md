@@ -18,9 +18,13 @@ Esse item é o básico do básico para o funcionamento de tudo que este guia con
 - [Power Sinus NG 3200VA](https://www.sms.com.br/governo/produtos/nobreaks/line-interactive-senoidal/power-sinus-ng-3200-va); 
 - [Net Adapter II (externo) SMS](https://www.sms.com.br/produtos/acessorios/gerenciamento/net-adapter-ii-externo);
 - [Raspberry Pi4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/);
->Você pode encontrar informações sobre os dois primeiros produtos acima no ([site oficial da SMS](www.sms.com.br/)), assim como pode comprpa-los em seus revendedores no Brasil (pesquisando na Kabum, MercadoLivre, Amazon e afins)
+>Você pode encontrar informações sobre os dois primeiros produtos acima no [site oficial da SMS](www.sms.com.br/), assim como pode comprá-los em seus revendedores no Brasil (pesquisando na Kabum, MercadoLivre, Amazon e afins)
 
-Uma vez que você os tenha em seu setup e esteja tudo funcionando, você vai precisar ter obviamente também possuir conexão de internet, e algum dispositivo capaz de executar Node.js. No meu caso, utilizei um servidor dedicado, mais especificamente um raspberry pi4, com windows arc instalado. É um tanto lento, mas serve à finalidade proposta. Caso deseje utilizar distros linux ou até MAC, contanto que possua o Node.js instalado, funcionará, já que o Net Adapter e o Nobreak se baseiam unicamente na comunicação entre eles, e não em um SO específico e afins. Se até mesmo quiser rodar através de um aparelho portátil, é possível, desde que consiga rodar o Node.js por ele.
+** Conforme nota abaixo, meu setup foi atualizado durante os testes, então no lugar do Pi4, eu usei o [GMKTec Nucbox G5](https://www.gmktec.com/products/intel-alder-lake-n97-mini-pc-nucbox-g5?srsltid=AfmBOoq9muMTurRlHbpqdfixOLxQFqGtgqkhfOV7SP9mv8_BLcujz2vZ).
+
+>Aqui eu quero lembrar, que posteriormente, eu acabei realizando um upgrade, onde migrei do Raspberry Pi4 para um Mini PC GMKTec G5. Veja a subseção "Upgrade de equipamento" na seção Utilidades ao fim deste guia.
+
+Uma vez que você os tenha em seu setup e esteja tudo funcionando, você vai precisar ter obviamente também possuir conexão de internet, e algum dispositivo capaz de executar Node.js. No meu caso, utilizei um servidor dedicado, mais especificamente um raspberry pi4, com windows arc instalado. É um tanto lento, mas serve à finalidade proposta. - posteriormente inclusive, acabei por atualizar para um Mini PC com mais desempenho, também Windows (verifique a seção "Utilidades" deste guia para mais detalhes) - Caso deseje utilizar distros linux ou até MAC, contanto que possua o Node.js instalado, funcionará, já que o Net Adapter e o Nobreak se baseiam unicamente na comunicação entre eles, e não em um SO específico e afins. Se até mesmo quiser rodar através de um aparelho portátil, é possível, desde que consiga rodar o Node.js por ele.
 
 **- 1.2 Node.js:**
 
@@ -95,7 +99,7 @@ Caso o Nobreak retorne um ok em outras situações, o normal é que envios de em
 
 **- 4.1 Automatização de execução do agente:** 
 
-Para o meu setup, conforme já mencionado, foi utilizado um Raspberry Pi4, utilizando uma build Arc do Windows 10. Por esse raspberry Pi eu faço o acesso remoto à diversas coisas de meu setup, e posso monitorá-las, dentre elas, o agente deste repositório.
+Para o meu setup, conforme já mencionado, foi utilizado um Raspberry Pi4, utilizando uma build Arc do Windows 10. Por esse raspberry Pi eu faço o acesso remoto à diversas coisas de meu setup, e posso monitorá-las, dentre elas, o agente deste repositório. - Posteriormente, atualizei para um mini PC Nucbox G5, da GMKTec, para maior desempenho, também utilizando um Windows. Cheque a seção "Utilidades" deste guia para mais detalhes.
 
 Pensando nisso, eu utilizei um comando Powershell (executa com o powershell.exe do Windows), que navega até a pasta do agente, e executa o código para que a captura de status seja realizada, os emails sejam enviados e etc.
 
@@ -135,7 +139,7 @@ Em meu setup, eu configurei ainda uma execução agendada do comando Powershell 
         - Para o segundo disparador, as configurações são essas:
         ![Configuração segundo disparador (automação do agente)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/second-trigger-configs.png)
         
-        *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar. Assim como no disparador anterior, aqui, na data que consta após a caixa marcada "Ativar", também não há grande importância, e você pode colocar uma data alguns minutos a frente da data de hoje, para poder dar tempo de finalizar as configurações do agendamento.*
+        *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4 e posteriormente um Nucbox G5) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar. Assim como no disparador anterior, aqui, na data que consta após a caixa marcada "Ativar", também não há grande importância, e você pode colocar uma data alguns minutos a frente da data de hoje, para poder dar tempo de finalizar as configurações do agendamento.*
 
         *OBS 2: É importante preencher o campo de "Interromper tarefa executada por mais de com o valor que te atender. Por padrão, ele lista apenas alguns valores, mas você pode digitar (desde que no formato correto), como no exemplo da imagem, onde eu coloco '8 minutos'. É bacana colocar esse tempo limite, pois caso a aplicação trave em algum ponto, não vai ficar num eterno loop. Vai encerrar e tentar de novo no tempo que você agendou.* 
   
@@ -169,7 +173,7 @@ Em meu setup, eu configurei ainda uma execução agendada do comando Powershell 
         - Para o segundo disparador, as configurações são essas:
         ![Configuração segundo disparador (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/log_cleaner-second-trigger-configs.png)
         
-        *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar.*
+        *OBS: Esse segundo disparador, é para caso o servidor (no meu setup o Raspberry Pi4 e posteriormente um Nucbox G5) reinicie ou ligue novamente após um desligamento, o agendamento seja retomado e a tarefa volte a ser executada. Apenas com o primeiro gatilho isso não seria possível, e você teria que manualmente recolocar o agendamento pra rodar.*
   
         - Ao fim da configuração dos dois disparadores, você terá a Aba "Disparadores" parecida com a abaixo:
         ![Configuração Aba "Disparadores" (automação limpeza logs)](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/scheduling-log_cleaner-triggers-tab.png)
@@ -208,6 +212,51 @@ Caso isso ocorra, você poderá fazer a instalação manual do google chrome in-
 Se em algum ponto você receber algum erro de *"connection refused"* ou *"timeout"* durante o processo de envio de email, há grandes chances disso ter acontecido por conta de má configuração das informações de SMTP no seu arquivo .env, portanto verifique-o de ponta a ponta.
 
 Além de problemas de informação do arquivo .env, certifique-se de que não esteja rodando o script numa rede protegida, ou caso sim, crie excessões de firewall e porta em seu roteador, pois se por alguma razão serviços de SMTP forem bloqueados pela sua rede, não vai funcionar de maneira nenhuma a notificação por email.
+
+### 6 - Utilidades:
+
+**- 6.1 Upgrade de equipamento:**
+
+Durante os meus testes, e algumas semanas depois fazendo outras tarefas, eu percebi o que já era inevitável. O Raspberry Pi4 é muito fraco pra alguns tipos de função, principalmente rodar um windows 10. Existem limitações de arquitetura, BUG's que são simplesmente impossíveis de resolver. Então em geral, você vai conseguir trabalhar com ele, mas vai ser sempre uma luta. Vai passar por lentidão, os BUG's já citados, vai ter problema no relógio (como eu tive), e você não vai conseguir sincronizar a hora direito. Enfim... é uma luta que ficou cansativa.
+
+Com isso, eu optei por fazer um upgrade de equipamento, onde eu substitui o Raspberry Pi4 por um Mini PC GMKTec G5, um Computador mega pequeno (até menor em tamanho que o Pi4), e com um grande poder de processamento se comparado ao Pi4. Dá até pra rodar outras coisas como retrogaming, e até alguns jogos mais leves (Hades, Deadcells e afins), então é um excelente aliado nessa aplicação. Com ele, não haverá nenhum desses problemas acima citados no Pi4, e além disso, ele ainda vem com uma licença Windows 11 Pro. Ou seja: é uma licença oficial, de uma versão atual do Windows, que terá suporte, segurança e afins. Ou seja, foi apenas vitória escolher fazer esse upgrade. Você consegue encontrar ele para comprar no Brasil entre 1500 a 2000 reais, ou pode importar no AliExpress (tenha em mente as taxações).
+
+Aqui, eu deixo o [site oficial da GMKTec](https://www.gmktec.com) - Você pode inclusive comprar direto pelo site deles, mas tenha em mente os impostos de importação, e a limitação que pode haver para envios até o Brasil - bem como a [página de suporte oficial da GMKTec](https://www.gmktec.com/pages/drivers-and-software?srsltid=AfmBOooI7fx1T7VpmnSbbAE1OOIikWRk0LoQl8_EVlZqTSWuVN8r5-Ho), onde dentre os itens da tabela, você pode achar os arquivos necessários para o Modelo Nucbox G5, tanto a instalação do windows customizada específica para o equipamento (caso você precise formatar) e os drivers em si.
+
+**- 6.2 Mudanças pós o upgrade:**
+
+Em suma, o agente funciona da mesma forma, e você poderia até mesmo manter as mesmíssimas configurações dos tópicos anteriores. Mas como eu testei, e vi que ele responde bem mais rápido, de modo muito mais fluido, eu optei por "cortar na metade" os timings de antes. Ou seja, eu alterei as tarefas agendadas, para a metade do tempo anterior, isto é, o agente checaria de 10 em 10 minutos, e encerraria a tarefa, caso ela deixasse de responder, em 8 minutos.
+
+O que eu fiz foi colocar ele para rodar de 5 em 5 minutos, e encerrar caso não responda em até 4. Em nenhum teste que eu fiz, chegou a demorar 1 minuto ou mais. Sempre respondeu entre 10 a no máximo 30 segundos, portanto é uma margem mega segura. 10 minutos já atendia, mas de 5 em 5 fica ainda melhor pra mim, pois assim eu garanto que caso falte energia, o Nobreak ficará apenas 5 minutos "fora do meu controle", ou seja, se faltar energia 12:00, 12:05 eu já vou ser avisado, e poder tomar providências. 
+
+Claro que idealmente o Nobreak não deveria durar apenas 10 minutos ligado, mas dependendo do tanto de coisas que você coloque pra ligar nele, pode ser que a bateria fique mais comprometida, então 5 minutos é realmente uma margem bem segura... afinal, se o seu nobreak não aguenta nem 5 minutos ligado, é hora de levar o bichinho pra uma manutenção, não é mesmo? hahaha. 
+
+Além disso, eu também alterei a tarefa de limpeza de logs, para passar a rodar todo dia às 23:59, e não mais às 23:55, eu fiz isso apenas para evitar que múltiplas tarefas agendadas executem no mesmo momento (isso não é um problema, é mais uma questão de boa prática mesmo, fiz testes com as duas rodando ao mesmo tempo, e não houve qualquer problema, mas preferi evitar), então antes, era sempre a cada 10 minutos redondo, por exemplo: 12:00, depois 12:10, depois 12:20 e assim sucessivamente. Agora, seria 12:00, depois 12:05, depois 12:10 e assim sucessivamente. Então se tivesse mantido a limpeza para 23:55 todo dia, eventualmente às 23:55 iriam ser desparadas as duas tarefas. Nos testes que fiz, a limpeza também não demorou mais que 10 segundos pra terminar, isso mesmo com a pasta cheia de logs, então ficou perfeito dessa forma, sem tarefas executando na mesma hora, e com as boas práticas em dia! :)
+
+Bem, dito tudo isso, abaixo deixo as telas das tarefas agendadas com as alterações que eu fiz.
+
+**6.2.1. Alteração na automação de execução do agente:**
+
+A alteração será apenas nos gatilhos, então, na configuração da tarefa agendada "Monitorar Nobreak SMS", você entrará no primeiro Gatilho ("Uma vez") e configurar conforme abaixo: 
+
+
+![Alteração no gatilho 1 da tarefa de monitoramento](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/post-upgrade-trigger1-agent-monitoring.png) 
+
+Agora, você entrará no segundo Gatilho ("Ao fazer logon") e configurar conforme abaixo
+![Alteração no gatilho 2 da tarefa de monitoramento](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/post-upgrade-trigger2-agent-monitoring.png) 
+
+***Lembrando que aqui valem as mesmas observações anteriores, a parte de "Iniciar" no gatilho 1, ou "Ativar" no gatilho 2 não tem tanta importância, o que importa é mais como você vai configurar os outros campos, ou seja, repetir "Indefinidamente" e ser de 5 em 5 minutos no gatilho 1, e interromper se tiver rodando por mais de 4 minutos em ambos os gatilhos.*
+
+**6.2.2. Alteração na automação de limpeza de logs obsoletos:**
+
+A alteração será apenas nos gatilhos, então, na configuração da tarefa agendada "Limpar logs obsoletos do Nobreak SMS", você entrará no primeiro Gatilho ("Diariamente") e configurar conforme abaixo: 
+![Alteração no gatilho 1 da tarefa de limpeza de logs](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/post-upgrade-trigger1-log-cleaning.png) 
+
+Agora, você entrará no segundo Gatilho ("Ao fazer logon") e configurar conforme abaixo:
+![Alteração no gatilho 2 da tarefa de limpeza de logs](https://raw.githubusercontent.com/chocolover80/sms-nobreak-home-outage-notification/refs/heads/main/docs/imgs/post-upgrade-trigger2-log-cleaning.png) 
+***Lembrando que aqui valem as mesmas observações anteriores, a parte de "Ativar" no gatilho 2 não tem tanta importância, o que importa é mais como você vai configurar os outros campos em ambos os gatilhos.*
+
+>Após ter feito isso, tudo esterá ainda mais ideal. Conforme expliquei, isso não é algo absolutamente necessário, e pode variar de acordo com a sua preferência. Eu recomendo fortemente, mas não sinta-se no dever de fazer tudo 100% como eu fiz. Espero ter ajudado! :)
 
 # Conclusão
 Bem, acredito que isso seja tudo. A princípio, o agente é extremamente simples, e não tem codificação complexa ou funcionalidades muito elaboradas. Foi tudo feito com puro webscrapping e as regras de negócio foram bem simples e atenderam muito bem minha necessidade. Mas de dev pra dev, a magia do opensource é poder colaborar entre si, então sintam-se à vontade para utilizar o projeto para qualquer finalidade (desde que não remunerada é claro), e até propor melhorias, sugestões e críticas. Qualquer dúvida que não esteja suprida na documentação, sinta-se a vontade para me contatar. Deixo meus detalhes de contato na página do perfil aqui no GitHub. Espero que seja útil, e até a próxima!
